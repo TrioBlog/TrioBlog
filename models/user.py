@@ -41,7 +41,8 @@ class User(db.Model):
 
     @classmethod
     def find_all(cls):
-        return User.query.all()
+        users = User.query.all()
+        return [user.json() for user in users]
 
     @classmethod
     def find_by_id(cls, id):

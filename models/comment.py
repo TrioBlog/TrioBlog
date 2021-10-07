@@ -1,6 +1,8 @@
 from models.db import db
 from datetime import datetime
 
+from models.user import User
+
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -13,14 +15,15 @@ class Comment(db.Model):
                            nullable=False, onupdate=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+    user_name = db.Column(db.String, nullable=False)
 
     # user = db.relationship('User', backref=db.backref('users', lazy=True))
     # post = db.relationship('Post', backref=db.backref('posts', lazy=True))
 
-    def __init__(self, title, body, user_id, post_id):
-        self.title = title
-        self.body = body
+    def __init__(self, comment, user_id, post_id):
+        self.comment = comment
         self.user_id = user_id
+        self.user_name = User.find_by_id(user_id).json()['user_name']
         self.post_id = post_id
 
     def json(self):
