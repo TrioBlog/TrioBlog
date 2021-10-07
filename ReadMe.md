@@ -11,7 +11,7 @@ This is a freeform blog created by a talented team of developers in hopes to giv
 ### __Tech Stack__
 
 <div style="display:flex, align-items:center, justify-content:center">
-<img src='./ReadMeImg/PSQL.png' alt='psql logo' width=200vw height=100vh>
-<img src='./ReadMeImg/flask-1.png' alt='flask logo' width=200vw height=100vh>
-<img src='./ReadMeImg/vue-js2.png' alt='vue logo' width=200vw height=100vh>
+<img src='./ReadMeImg/PSQL.png' alt='psql logo' width=250vw height=100vh>
+<img src='./ReadMeImg/flask-1.png' alt='flask logo' width=250vw height=100vh>
+<img src='./ReadMeImg/vue-js2.png' alt='vue logo' width=250vw height=100vh>
 </div>
