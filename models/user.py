@@ -13,8 +13,8 @@ class User(db.Model):
   updated_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False, onupdate=datetime.now())
 
 #Associations
-  post = db.relationship("Post", backref=db.backref('posts', lazy=True))
-  comment = db.relationship("Comment", backref=db.backref('comments', lazy=True))
+  # post = db.relationship("Post", backref=db.backref('posts', lazy=True))
+  # comment = db.relationship("Comment", backref=db.backref('comments', lazy=True))
 
   def __init__(self, user_name, password_digest):
     self.user_name = user_name
@@ -41,4 +41,9 @@ class User(db.Model):
   @classmethod
   def find_by_id(cls, id):
     user = User.query.filter_by(id=id).first()
+    return user
+
+  @classmethod
+  def find_by_user_name(cls, user_name):
+    user = User.query.filter_by(user_name=user_name).first()
     return user

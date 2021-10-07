@@ -14,7 +14,7 @@ class Post(db.Model):
                            nullable=False, onupdate=datetime.now)
     user_id = db.Column(db.Integer, nullable=False)
 
-    users = db.relationship('User', backref=db.backref('users', lazy=True))
+    # users = db.relationship('User', backref=db.backref('users', lazy=True))
 
     def __init__(self, title, body, user_id):
         self.title = title
