@@ -39,7 +39,7 @@ class UsersDetail(Resource):
         return {'msg': 'User Deletion Successful', 'payload': copy}
 
 
-class UserAll(Resource):
+class AllUsers(Resource):
     def get(self):
         users = User.find_all()
         return users
