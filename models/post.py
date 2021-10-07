@@ -16,9 +16,9 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
     user_name = db.Column(db.Interger, nullable=False)
 
-    users = db.relationship('User', backref=db.backref('users', lazy=True))
-    comments = db.relationship("Comment", cascade='all',
-                               backref=db.backref('comments', lazy=True))
+    # users = db.relationship('User', backref=db.backref('users', lazy=True))
+    # comments = db.relationship("Comment", cascade='all',
+    #                            backref=db.backref('comments', lazy=True))
 
     def __init__(self, title, body, user_id):
         self.title = title

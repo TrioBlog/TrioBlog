@@ -8,15 +8,14 @@ class Login(Resource):
     data = request.get_json()
     user = User.find_by_user_name(data["user_name"])
     if compare_password(data["password"], user.json()["password_digest"]):
-      user_id = str(user.json()["id"])
-      print({"id": "{val}".format(val=str(user.json()["id"])), "user_name": "{val}".format(val=str(user.json()["user_name"])) })
-      token = create_token({"id": "{val}".format(val=str(user.json()["id"])), "user_name": "{val}".format(val=str(user.json()["user_name"])) })
+      token = create_token({"id": str(user.json()["id"]), "user_name": str(user.json()["user_name"]) })
       return token, 200
 
   def get(self):
     data = request.get_json()
-    if read_token(data) == "Signature Invalid" or read_token(data) == "Token Invalid":
+    if read_token(data["token"]) == "Signature Invalid" or read_token(data["token"]) == "Token Invalid":
       return { "message": "unauthorized" }, 404
+    return read_token(data["token"]), 200
 
 class Register(Resource):
   def post(self):
