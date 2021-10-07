@@ -14,8 +14,8 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
-    user = db.Relationship('User', backref=db.backref('users', lazy=True))
-    post = db.Relationship('Post', backref=db.backref('posts', lazy=True))
+    # user = db.relationship('User', backref=db.backref('users', lazy=True))
+    # post = db.relationship('Post', backref=db.backref('posts', lazy=True))
 
     def __init__(self, title, body, user_id, post_id):
         self.title = title
