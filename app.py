@@ -27,7 +27,7 @@ api.add_resource(Login, '/user/login')
 api.add_resource(Register, '/user/register')
 # User Routes
 api.add_resource(UsersDetail, '/user')
-api.add_resource(UsersDetail, '/user/<int:user_id>')
+api.add_resource(UsersDetail, '/user/<string:user_id>')
 api.add_resource(AllUsers, '/users')
 # Post Routes
 api.add_resource(UserPosts, '/user/posts')
