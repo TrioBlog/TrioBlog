@@ -2,19 +2,18 @@ from models.db import db
 from datetime import datetime
 
 
-class Post(db.Model):
-    __tablename__ = 'posts'
+class Comment(db.Model):
+    __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
-    body = db.Column(db.String(500))
+    comment = db.Column(db.String(100), nullable=False)
     created_at = db.Column(
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
     user_id = db.Column(db.Integer, nullable=False)
 
-    users = db.relationship('User', backref=db.backref('users', lazy=True))
+    user = db.Relationship('User', backref=db.backref('users', lazy=True))
 
     def __init__(self, title, body, user_id):
         self.title = title
@@ -22,8 +21,7 @@ class Post(db.Model):
         self.user_id = user_id
 
     def json(self):
-        return {'id': self.id, 'title': self.title, 'body': self.body, 'created_at': self.created_at,
-                'updated_at': self.updated_at, 'user_id': self.user_id}
+        return {'id': self.id, "comment": self.comment, 'created_at': self.created_at, 'updated_at': self.updated_at, 'user_id': self.user_id}
 
     def create(self):
         db.session.add(self)
@@ -32,15 +30,15 @@ class Post(db.Model):
 
     @classmethod
     def find_all(cls):
-        posts = Post.query.all()
-        return [post.json() for post in posts]
+        comments = Comment.query.all()
+        return [comment.json() for comment in comments]
 
     @classmethod
-    def find_by_id(cls, post_id):
-        post = Post.query.filter_by(id=post_id).first()
+    def find_by_id(cls, comment_id):
+        post = Comment.query.filter_by(id=comment_id).first()
         return post
 
     @classmethod
     def find_by_user_id(cls, user_id):
-        posts = Post.query.filter_by(user_id=user_id).all()
-        return [post.json() for post in posts]
+        comments = Comment.query.filter_by(user_id=user_id).all()
+        return [comment.json() for comment in comments]
