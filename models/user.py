@@ -10,12 +10,16 @@ class User(db.Model):
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_name = db.Column(db.String(255), nullable=False, unique=True)
     password_digest = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False, onupdate=datetime.now())
+    created_at = db.Column(
+        db.DateTime, default=datetime.utcnow(), nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow(
+    ), nullable=False, onupdate=datetime.now())
 
 # Associations
-    posts = db.relationship("Post", cascade='all', backref=db.backref('posts', lazy=True))
-    comments = db.relationship("Comment", cascade='all', backref=db.backref('comments', lazy=True))
+    post = db.relationship("Post", cascade='all',
+                           backref=db.backref('user_posts', lazy=True))
+    comment = db.relationship("Comment", cascade='all',
+                              backref=db.backref('user_comments', lazy=True))
 
     def __init__(self, user_name, password_digest):
         self.user_name = user_name

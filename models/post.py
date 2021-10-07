@@ -15,12 +15,12 @@ class Post(db.Model):
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
-    user_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
 
-    users = db.relationship('User', backref=db.backref('users', lazy=True))
-    comments = db.relationship(
-        "Comment", cascade='all', backref=db.backref('comments', lazy=True))
+    user = db.relationship('User', backref=db.backref('post_user', lazy=True))
+    comment = db.relationship(
+        "Comment", cascade='all', backref=db.backref('post_comments', lazy=True))
 
     def __init__(self, title, body, user_id):
         self.title = title
