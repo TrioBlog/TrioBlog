@@ -30,13 +30,13 @@ class UserComments(Resource):
     def delete(self, comment_id):
         comment = Comment.find_by_id(comment_id)
         if not comment:
-            return {"msg": "Not found"}, 404
+            return {'msg': 'Comment Not found'}, 404
         copy = {}
-        for key in comment.keys():
-            copy['%s' % key] = comment[key]
+        for key in comment.json().keys():
+            copy[key] = comment.json()[key]
         db.session.delete(comment)
         db.session.commit()
-        return {"msg": "Task Deleted", "payload": copy}
+        return {'msg': 'Comment Deletion Successful', 'payload': copy}
 
 
 class PostComments(Resource):
