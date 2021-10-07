@@ -14,7 +14,7 @@ class Post(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
     user_id = db.Column(db.Integer, nullable=False)
-    user_name = db.Column(db.Interger, nullable=False)
+    user_name = db.Column(db.String(255), nullable=False)
 
     # users = db.relationship('User', backref=db.backref('users', lazy=True))
     # comments = db.relationship("Comment", cascade='all',
