@@ -12,15 +12,6 @@ class UsersDetail(Resource):
         user = User.find_by_id(user_id)
         return user.json()
 
-    def post(self):
-        data = request.get_json()
-        params = {}
-        for key in data.keys():
-            params[key] = data[key]
-        user = User(**params)
-        user.create()
-        return user.json(), 201
-
 
 class UserIdDep(Resource):
     def patch(self, user_id):
