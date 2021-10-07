@@ -9,26 +9,28 @@ class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    comment = db.Column(db.String(100), nullable=False)
+    body = db.Column(db.String(100), nullable=False)
     created_at = db.Column(
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
-    user_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
 
-    user = db.relationship('User', backref=db.backref('users', lazy=True))
-    post = db.relationship('Post', backref=db.backref('posts', lazy=True))
+    user = db.relationship(
+        'User', backref=db.backref('comment_user', lazy=True))
+    post = db.relationship(
+        'Post', backref=db.backref('comment_post', lazy=True))
 
-    def __init__(self, comment, user_id, post_id):
-        self.comment = comment
+    def __init__(self, body, user_id, post_id):
+        self.body = body
         self.user_id = user_id
         self.user_name = User.find_by_id(user_id).json()['user_name']
         self.post_id = post_id
 
     def json(self):
-        return {'id': str(self.id), "comment": self.comment, 'created_at': str(self.created_at),
+        return {'id': str(self.id), "body": self.body, 'created_at': str(self.created_at),
                 'updated_at': str(self.updated_at), 'user_id': self.user_id, 'post_id': self.post_id}
 
     def create(self):
