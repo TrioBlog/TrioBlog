@@ -26,17 +26,13 @@ migrate = Migrate(app, db)
 api.add_resource(Login, '/user/login')
 api.add_resource(Register, '/user/register')
 # User Routes
-api.add_resource(UsersDetail, '/user')
 api.add_resource(UsersDetail, '/user/<string:user_id>')
 api.add_resource(AllUsers, '/users')
 # Post Routes
 api.add_resource(UserPosts, '/user/posts')
-api.add_resource(Posts, '/posts')
 api.add_resource(Posts, '/posts/<int:post_id>')
 # Comment Routes
 api.add_resource(PostComments, '/posts/comments/<int:post_id>')
-api.add_resource(UserComments, '/user/comments')
-api.add_resource(UserComments, '/user/comment/<int:comment_id>')
 api.add_resource(UserComments, '/user/comments/<int:user_id>')
 
 if __name__ == '__main__':
