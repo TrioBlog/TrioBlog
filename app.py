@@ -13,7 +13,7 @@ CORS(app)
 api = Api(app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost:5000/trioblog_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost:5432/trioblog_db"
 app.config['SQLALCHEMY_ECHO'] = True
 
 db.init_app(app)
