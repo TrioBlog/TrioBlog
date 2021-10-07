@@ -11,8 +11,8 @@ class Comment(db.Model):
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
-    user_id = db.Column(db.Integer, nullable=False)
-    post_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
     user = db.Relationship('User', backref=db.backref('users', lazy=True))
     post = db.Relationship('Post', backref=db.backref('posts', lazy=True))
@@ -39,8 +39,8 @@ class Comment(db.Model):
 
     @classmethod
     def find_by_id(cls, comment_id):
-        post = Comment.query.filter_by(id=comment_id).first()
-        return post
+        comment = Comment.query.filter_by(id=comment_id).first()
+        return comment
 
     @classmethod
     def find_by_user_id(cls, user_id):
