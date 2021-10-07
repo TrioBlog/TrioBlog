@@ -12,16 +12,20 @@ class Comment(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
     user_id = db.Column(db.Integer, nullable=False)
+    post_id = db.Column(db.Integer, nullable=False)
 
     user = db.Relationship('User', backref=db.backref('users', lazy=True))
+    post = db.Relationship('Post', backref=db.backref('posts', lazy=True))
 
-    def __init__(self, title, body, user_id):
+    def __init__(self, title, body, user_id, post_id):
         self.title = title
         self.body = body
         self.user_id = user_id
+        self.post_id = post_id
 
     def json(self):
-        return {'id': self.id, "comment": self.comment, 'created_at': self.created_at, 'updated_at': self.updated_at, 'user_id': self.user_id}
+        return {'id': self.id, "comment": self.comment, 'created_at': self.created_at,
+                'updated_at': self.updated_at, 'user_id': self.user_id, 'post_id': self.post_id}
 
     def create(self):
         db.session.add(self)
@@ -41,4 +45,8 @@ class Comment(db.Model):
     @classmethod
     def find_by_user_id(cls, user_id):
         comments = Comment.query.filter_by(user_id=user_id).all()
+        return [comment.json() for comment in comments]
+
+    def find_by_post_id(cls, post_id):
+        comments = Comment.query.filter_by(post_id=post_id).all()
         return [comment.json() for comment in comments]
