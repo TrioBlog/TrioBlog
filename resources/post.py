@@ -1,3 +1,4 @@
+from uuid import UUID
 from models.post import Post
 from models.db import db
 from flask_restful import Resource
@@ -22,15 +23,17 @@ class Posts(Resource):
 
 class PostsIdDep(Resource):
     def patch(self, post_id):
+        id = UUID(post_id)
         data = request.get_json()
-        post = Post.find_by_id(post_id)
+        post = Post.find_by_id(id)
         for key in data.keys():
             post[key] = data[key]
         db.session.commit()
         return post.json()
 
     def delete(self, post_id):
-        post = Post.find_by_id(post_id)
+        id = UUID(post_id)
+        post = Post.find_by_id(id)
         if not post:
             return {'msg': 'Post Not Found'}
         copy = {}
@@ -43,5 +46,6 @@ class PostsIdDep(Resource):
 
 class UserPosts(Resource):
     def get(self, user_id):
-        posts = Post.find_by_user_id(user_id)
+        id = UUID(user_id)
+        posts = Post.find_by_user_id(id)
         return posts

@@ -1,12 +1,14 @@
 from models.db import db
 from datetime import datetime
 from models.user import User
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
 
 class Post(db.Model):
     __tablename__ = 'posts'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = db.Column(db.String(50), nullable=False)
     body = db.Column(db.String(500))
     created_at = db.Column(
@@ -16,9 +18,9 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
 
-    # users = db.relationship('User', backref=db.backref('users', lazy=True))
-    # comments = db.relationship("Comment", cascade='all',
-    #                            backref=db.backref('comments', lazy=True))
+    users = db.relationship('User', backref=db.backref('users', lazy=True))
+    comments = db.relationship("Comment", cascade='all',
+                               backref=db.backref('comments', lazy=True))
 
     def __init__(self, title, body, user_id):
         self.title = title
