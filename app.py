@@ -13,7 +13,7 @@ CORS(app)
 api = Api(app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost:5432/trioblog_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost:5000/trioblog_db"
 app.config['SQLALCHEMY_ECHO'] = True
 
 db.init_app(app)
@@ -24,16 +24,16 @@ api.add_resource(auth.Login, '/user/login')
 api.add_resource(auth.Register, '/user/register')
 # User Routes
 api.add_resource(user.UsersDetail, '/user')
-api.add_resource(user.UsersDetail, '/user/<int:user_id>')
+api.add_resource(user.UserIdDep, '/user/<int:user_id>')
 api.add_resource(user.AllUsers, '/users')
 # Post Routes
 api.add_resource(post.UserPosts, '/user/posts')
 api.add_resource(post.Posts, '/posts')
-api.add_resource(post.Posts, '/posts/<int:post_id>')
+api.add_resource(post.PostsIdDep, '/posts/<int:post_id>')
 # Comment Routes
 api.add_resource(comment.PostComments, '/posts/comments/<int:post_id>')
-api.add_resource(comment.UserComments, '/user/comments')
-api.add_resource(comment.UserComments, '/user/comment/<int:comment_id>')
+api.add_resource(comment.CommentPost, '/user/comments')
+api.add_resource(comment.CommentsIdDep, '/user/comment/<int:comment_id>')
 api.add_resource(comment.UserComments, '/user/comments/<int:user_id>')
 
 if __name__ == '__main__':

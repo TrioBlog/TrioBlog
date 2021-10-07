@@ -10,6 +10,8 @@ class UserComments(Resource):
         comments = Comment.find_by_user_id(user_id)
         return comments
 
+
+class CommentPost(Resource):
     def post(self):
         data = request.get_json()
         params = {}
@@ -19,6 +21,8 @@ class UserComments(Resource):
         comment.create()
         return comment.json(), 201
 
+
+class CommentsIdDep(Resource):
     def patch(self, comment_id):
         data = request.get_json()
         comment = Comment.find_by_id(comment_id)
