@@ -19,6 +19,8 @@ class Posts(Resource):
         post.create()
         return post.json(), 201
 
+
+class PostsIdDep(Resource):
     def patch(self, post_id):
         data = request.get_json()
         post = Post.find_by_id(post_id)

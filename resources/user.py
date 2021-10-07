@@ -19,6 +19,8 @@ class UsersDetail(Resource):
         user.create()
         return user.json(), 201
 
+
+class UserIdDep(Resource):
     def patch(self, user_id):
         data = request.get_json()
         user = User.find_by_id(user_id)
