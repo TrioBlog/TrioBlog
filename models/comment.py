@@ -15,7 +15,7 @@ class Comment(db.Model):
                            nullable=False, onupdate=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
-    user_name = db.Column(db.String, nullable=False)
+    user_name = db.Column(db.String(255), nullable=False)
 
     # user = db.relationship('User', backref=db.backref('users', lazy=True))
     # post = db.relationship('Post', backref=db.backref('posts', lazy=True))
