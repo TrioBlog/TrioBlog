@@ -8,7 +8,7 @@
 ### __Service Description__
 This is a freeform blog created by a talented team of developers in hopes to give people a place to share whatever they're thinking
 
-<h3 align='center'><b>Tech Stack</b></h3>
+### __Tech Stack__
 
 <div style="display:flex, align-items:center, justify-content:center">
 <img src='./ReadMeImg/PSQL.png' alt='psql logo' width=300vw height=100vh>
