@@ -1,3 +1,4 @@
+from uuid import UUID
 from models.user import User
 from models.db import db
 from flask_restful import Resource
@@ -7,6 +8,7 @@ from sqlalchemy.orm import joinedload
 
 class UsersDetail(Resource):
     def get(self, user_id):
+        user_id = UUID(user_id)
         user = User.find_by_id(user_id)
         return user.json()
 
@@ -22,6 +24,7 @@ class UsersDetail(Resource):
 
 class UserIdDep(Resource):
     def patch(self, user_id):
+        user_id = UUID(user_id)
         data = request.get_json()
         user = User.find_by_id(user_id)
         for key in data.keys():
@@ -30,6 +33,7 @@ class UserIdDep(Resource):
         return user.json()
 
     def delete(self, user_id):
+        user_id = UUID(user_id)
         user = User.find_by_id(user_id)
         if not user:
             return {'msg': 'User Not found'}, 404

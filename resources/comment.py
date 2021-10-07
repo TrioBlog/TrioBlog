@@ -1,3 +1,4 @@
+from uuid import UUID
 from models.comment import Comment
 from models.db import db
 from flask_restful import Resource
@@ -7,6 +8,7 @@ from sqlalchemy.orm import joinedload
 
 class UserComments(Resource):
     def get(self, user_id):
+        user_id = UUID(user_id)
         comments = Comment.find_by_user_id(user_id)
         return comments
 
@@ -24,6 +26,7 @@ class CommentPost(Resource):
 
 class CommentsIdDep(Resource):
     def patch(self, comment_id):
+        comment_id = UUID(comment_id)
         data = request.get_json()
         comment = Comment.find_by_id(comment_id)
         for key in data.keys():
@@ -32,6 +35,7 @@ class CommentsIdDep(Resource):
         return comment.json()
 
     def delete(self, comment_id):
+        comment_id = UUID(comment_id)
         comment = Comment.find_by_id(comment_id)
         if not comment:
             return {'msg': 'Comment Not found'}, 404
@@ -45,5 +49,6 @@ class CommentsIdDep(Resource):
 
 class PostComments(Resource):
     def get(self, post_id):
+        post_id = UUID(post_id)
         comments = Comment.find_by_post_id(post_id)
         return comments

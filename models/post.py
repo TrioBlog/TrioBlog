@@ -19,8 +19,8 @@ class Post(db.Model):
     user_name = db.Column(db.String(255), nullable=False)
 
     users = db.relationship('User', backref=db.backref('users', lazy=True))
-    comments = db.relationship("Comment", cascade='all',
-                               backref=db.backref('comments', lazy=True))
+    comments = db.relationship(
+        "Comment", cascade='all', backref=db.backref('comments', lazy=True))
 
     def __init__(self, title, body, user_id):
         self.title = title
@@ -29,8 +29,15 @@ class Post(db.Model):
         self.user_name = User.find_by_id(user_id).json()['user_name']
 
     def json(self):
-        return {'id': self.id, 'title': self.title, 'body': self.body, 'created_at': self.created_at,
-                'updated_at': self.updated_at, 'user_id': self.user_id, 'user_name': self.user_name}
+        return {
+            'id': self.id,
+            'title': self.title,
+            'body': self.body,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'user_id': self.user_id,
+            'user_name': self.user_name
+        }
 
     def create(self):
         db.session.add(self)

@@ -10,16 +10,12 @@ class User(db.Model):
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_name = db.Column(db.String(255), nullable=False, unique=True)
     password_digest = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(
-        db.DateTime, default=datetime.utcnow(), nullable=False)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow(
-    ), nullable=False, onupdate=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False, onupdate=datetime.now())
 
 # Associations
-    # posts = db.relationship("Post", cascade='all',
-    #                         backref=db.backref('posts', lazy=True))
-    # comments = db.relationship("Comment", cascade='all',
-    #                            backref=db.backref('comments', lazy=True))
+    posts = db.relationship("Post", cascade='all', backref=db.backref('posts', lazy=True))
+    comments = db.relationship("Comment", cascade='all', backref=db.backref('comments', lazy=True))
 
     def __init__(self, user_name, password_digest):
         self.user_name = user_name
@@ -27,7 +23,7 @@ class User(db.Model):
 
     def json(self):
         return {
-            "id": self.id,
+            "id": str(self.id),
             "user_name": self.user_name,
             "password_digest": self.password_digest,
             "created_at": str(self.created_at),
@@ -51,5 +47,5 @@ class User(db.Model):
 
     @classmethod
     def find_by_user_name(cls, user_name):
-      user = User.query.filter_by(user_name=user_name).first()
-      return user
+        user = User.query.filter_by(user_name=user_name).first()
+        return user

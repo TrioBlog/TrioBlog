@@ -23,17 +23,17 @@ class Posts(Resource):
 
 class PostsIdDep(Resource):
     def patch(self, post_id):
-        id = UUID(post_id)
+        post_id = UUID(post_id)
         data = request.get_json()
-        post = Post.find_by_id(id)
+        post = Post.find_by_id(post_id)
         for key in data.keys():
             post[key] = data[key]
         db.session.commit()
         return post.json()
 
     def delete(self, post_id):
-        id = UUID(post_id)
-        post = Post.find_by_id(id)
+        post_id = UUID(post_id)
+        post = Post.find_by_id(post_id)
         if not post:
             return {'msg': 'Post Not Found'}
         copy = {}
@@ -46,6 +46,6 @@ class PostsIdDep(Resource):
 
 class UserPosts(Resource):
     def get(self, user_id):
-        id = UUID(user_id)
-        posts = Post.find_by_user_id(id)
+        user_id = UUID(user_id)
+        posts = Post.find_by_user_id(user_id)
         return posts
