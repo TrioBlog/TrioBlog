@@ -1,4 +1,5 @@
 from uuid import UUID
+from middleware import read_token
 from models.user import User
 from models.db import db
 from flask_restful import Resource
@@ -36,5 +37,10 @@ class UsersDetail(Resource):
 
 class AllUsers(Resource):
     def get(self):
-        users = User.find_all()
-        return users
+        data = request.get_json()
+        token = strip_token(data)
+        if read_token(token)['data']:
+            users = User.find_all()
+            return users
+        else:
+            return read_token(token)['payload']

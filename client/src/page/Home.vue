@@ -23,20 +23,20 @@ components:{
 },
 data: () => ({
 
-  postList: [],
-  fetchSinglePost: [],
-  commentLists: [],
-  singleComments: ''
+  // postList: [],
+  fetchSinglePost: []
+  // commentLists: [],
+  // singleComments: ''
   }),
   mounted(){
 
   },
 methods:{
-    async getPosts(e) {
-      e.preventDefault()
-      const res = await axios.get()
-      this.postlist = res.data
-    },
+    // async getPosts(e) {
+    //   e.preventDefault()
+    //   const res = await axios.get()
+    //   this.postlist = res.data
+    // },
     async getPostById(e) {
       e.preventDefault()
       const postId = this.$route.params.post_id
