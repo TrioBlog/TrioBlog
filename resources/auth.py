@@ -30,26 +30,5 @@ class Register(Resource):
         }
         user = User(**params)
         user.create()
+        print(user.json())
         return user.json(), 201
-
-
-class StripAndVerifyToken(Resource):
-    def get(self):
-        data = request.get_json()
-        token = strip_token(data)
-        read_token(token)
-
-    def post(self):
-        data = request.get_json()
-        token = strip_token(data)
-        read_token(token)
-
-    def patch(self):
-        data = request.get_json()
-        token = strip_token(data)
-        read_token(token)
-
-    def delete(self):
-        data = request.get_json()
-        token = strip_token(data)
-        read_token(token)

@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import axios from "axios"
+import {BASE_URL} from '../globals'
 export default {
   name: 'SignIn',
   components: {},
@@ -31,8 +33,20 @@ export default {
     handlePass(event){
       this.password = event.target.value
     },
-    onSubmit(){
-    this.$router.push(`/home`)
+    async onSubmit(){
+      try {
+      const res = await axios.post(`${BASE_URL}user/login`, {"user_name": this.username, "password": this.password})
+      if (res.data){
+        localStorage.setItem('token', res.data)
+        this.username = ''
+        this.password = ''
+        this.$router.push(`/home`)
+      } else {
+        alert("unauthorized")
+      }
+      } catch (err) {
+        alert("an error occurred when attempting to sign in")
+      }
     }
   }
 }
