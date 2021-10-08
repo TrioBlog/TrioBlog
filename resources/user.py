@@ -19,9 +19,9 @@ class UsersDetail(Resource):
             return read_token(token)['payload']
 
     def patch(self, user_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
+            data = request.get_json()
             user_id = UUID(user_id)
             user = User.find_by_id(user_id)
             for key in data.keys():
@@ -32,8 +32,7 @@ class UsersDetail(Resource):
             return read_token(token)['payload']
 
     def delete(self, user_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             user_id = UUID(user_id)
             user = User.find_by_id(user_id)
@@ -51,8 +50,7 @@ class UsersDetail(Resource):
 
 class AllUsers(Resource):
     def get(self):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             users = User.find_all()
             return users

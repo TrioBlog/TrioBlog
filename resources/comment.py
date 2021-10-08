@@ -9,8 +9,7 @@ from middleware import read_token, strip_token
 
 class UserComments(Resource):
     def get(self, user_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             user_id = UUID(user_id)
             comments = Comment.find_by_user_id(user_id)
@@ -21,9 +20,9 @@ class UserComments(Resource):
 
 class Comments(Resource):
     def post(self):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
+            data = request.get_json()
             params = {}
             for key in data.keys():
                 params[key] = data[key]
@@ -36,9 +35,9 @@ class Comments(Resource):
 
 class CommentId(Resource):
     def patch(self, comment_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
+            data = request.get_json()
             comment_id = UUID(comment_id)
             comment = Comment.find_by_id(comment_id)
             for key in data.keys():
@@ -49,8 +48,7 @@ class CommentId(Resource):
             return read_token(token)['payload']
 
     def delete(self, comment_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             comment_id = UUID(comment_id)
             comment = Comment.find_by_id(comment_id)
@@ -68,8 +66,7 @@ class CommentId(Resource):
 
 class PostComments(Resource):
     def get(self, post_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             post_id = UUID(post_id)
             comments = Comment.find_by_post_id(post_id)
