@@ -4,15 +4,15 @@
       <h2>Your Thoughts?</h2>
     </div>
     <div class="postFormContainer">
-      <form >
+      <form @submit.prevent="onSubmit">
         <input
-        name="postTitle"
-          :value="postTitle"
+        name="title"
+          :value="title"
           @input="handleChange"
         />
         <input
-        name="postBody"
-          :value="postBody"
+        name="body"
+          :value="body"
           @input="handleChange"
         />
         <button class="postSubmit">Post</button>
@@ -23,27 +23,15 @@
 
 <script>
 // import Post from './Post.vue'
-import {Client} from '../globals'
+// import {Client} from '../globals'
 export default {
-  // components: { Post },
   name: 'CreatePost',
-  // props: ['username']
-  data: () => ({
-  postTitle: '',
-  postBody: '',
-  user_name: ''
-  }),
   methods:{
-    handleChange(event){
-      this[event.target.name] = event.target.value
+    handleChange(e){
+      this.$emit('handleFormChange', e.target.name, e.target.value )
     },
     onSubmit(){
-      const body = {
-        "user_name": this.user_name,
-        "body": this.postBody,
-        "title": this.postTitle
-      }
-      Client.post('/post', body)
+      this.$emit('handleSubmit')
     },
   }
 }
