@@ -11,9 +11,9 @@ class User(db.Model):
     user_name = db.Column(db.String(255), nullable=False, unique=True)
     password_digest = db.Column(db.String(255), nullable=False)
     created_at = db.Column(
-        db.DateTime, default=datetime.utcnow(), nullable=False)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow(
-    ), nullable=False, onupdate=datetime.now())
+        db.DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow,
+                           nullable=False, onupdate=datetime.utcnow)
 
 # Associations
     post = db.relationship("Post", cascade='all',
