@@ -19,7 +19,6 @@ name: 'Post',
 data: () => ({
   getposts: []
   }),
-
 }
 
 </script>
