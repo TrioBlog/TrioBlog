@@ -15,7 +15,8 @@ class Post(db.Model):
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
+        'users.id'), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
 
     user = db.relationship('User', backref=db.backref('post_user', lazy=True))
@@ -30,18 +31,18 @@ class Post(db.Model):
 
     def json(self):
         return {
-            'id': self.id,
+            'id': str(self.id),
             'title': self.title,
             'body': self.body,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at,
-            'user_id': self.user_id,
+            'created_at': str(self.created_at),
+            'updated_at': str(self.updated_at),
+            'user_id': str(self.user_id),
             'user_name': self.user_name
         }
 
     def create(self):
         db.session.add(self)
-        db.commit()
+        db.session.commit()
         return self
 
     @classmethod

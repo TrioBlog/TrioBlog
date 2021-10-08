@@ -14,8 +14,10 @@ class Comment(db.Model):
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
+        'users.id'), nullable=False)
+    post_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
+        'posts.id'), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
 
     user = db.relationship(
@@ -31,11 +33,11 @@ class Comment(db.Model):
 
     def json(self):
         return {'id': str(self.id), "body": self.body, 'created_at': str(self.created_at),
-                'updated_at': str(self.updated_at), 'user_id': self.user_id, 'post_id': self.post_id}
+                'updated_at': str(self.updated_at), 'user_id': str(self.user_id), 'post_id': str(self.post_id)}
 
     def create(self):
         db.session.add(self)
-        db.commit()
+        db.session.commit()
         return self
 
     @classmethod
@@ -53,6 +55,7 @@ class Comment(db.Model):
         comments = Comment.query.filter_by(user_id=user_id).all()
         return [comment.json() for comment in comments]
 
+    @classmethod
     def find_by_post_id(cls, post_id):
         comments = Comment.query.filter_by(post_id=post_id).all()
         return [comment.json() for comment in comments]

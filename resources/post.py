@@ -27,7 +27,7 @@ class PostId(Resource):
         data = request.get_json()
         post = Post.find_by_id(post_id)
         for key in data.keys():
-            post[key] = data[key]
+            setattr(post, key, data[key])
         db.session.commit()
         return post.json()
 
