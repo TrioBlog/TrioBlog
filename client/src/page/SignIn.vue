@@ -3,9 +3,11 @@
     <h1>Sign In</h1>
     <form @submit.prevent="onSubmit" >
       <div>
+        <h2>Username:</h2>
         <input type="username" :value="username" @input="handleChange"  />
       </div>
       <div>
+        <h2>Password:</h2>
         <input type="password" :value="password" @input="handlePass" />
       </div>
       <button type="submit" :disabled="username ==='' || password === ''">Sign In</button>
