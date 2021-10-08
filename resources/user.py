@@ -17,7 +17,7 @@ class UsersDetail(Resource):
         data = request.get_json()
         user = User.find_by_id(user_id)
         for key in data.keys():
-            user[key] = data[key]
+            setattr(user, key, data[key])
         db.session.commit()
         return user.json()
 
