@@ -10,7 +10,7 @@ class Login(Resource):
         user = User.find_by_user_name(data["user_name"])
         if compare_password(data["password"], user.json()["password_digest"]):
             token = create_token(
-                {"id": str(user.json()["id"]), "user_name": str(user.json()["user_name"])})
+                {"id": str(user.id), "user_name": user.user_name})
             return token, 200
 
     def get(self):
