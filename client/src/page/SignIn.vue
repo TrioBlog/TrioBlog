@@ -10,8 +10,10 @@
         <h2>Password:</h2>
         <input type="password" :value="password" @input="handlePass" />
       </div>
+      <div>
+        <a href="/">New Account?</a>
+      </div>
       <button type="submit" :disabled="username ==='' || password === ''">Sign In</button>
-      <a href="/">New Account?</a>
     </form>
   </div>
 </template>
@@ -38,9 +40,8 @@ export default {
       const res = await axios.post(`${BASE_URL}user/login`, {"user_name": this.username, "password": this.password})
       if (res.data){
         localStorage.setItem('token', res.data)
-        this.username = ''
         this.password = ''
-        this.$router.push(`/home`)
+        this.$router.push({ path: `/home`, props: this.username })
       } else {
         alert("unauthorized")
       }
@@ -53,5 +54,11 @@ export default {
 </script>
 
 <style scoped>
-
+input {
+  background-color: aqua;
+  padding: 10px;
+}
+.divCon {
+  text-align: center;
+}
 </style>
