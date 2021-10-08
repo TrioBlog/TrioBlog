@@ -23,11 +23,11 @@ class Post(db.Model):
     comment = db.relationship(
         "Comment", cascade='all', backref=db.backref('post_comments', lazy=True))
 
-    def __init__(self, title, body, user_id):
+    def __init__(self, title, body, user_name):
         self.title = title
         self.body = body
-        self.user_id = user_id
-        self.user_name = User.find_by_id(user_id).json()['user_name']
+        self.user_name = user_name
+        self.user_id = UUID(User.find_by_user_name(user_name).json()['id'])
 
     def json(self):
         return {
@@ -56,6 +56,6 @@ class Post(db.Model):
         return post
 
     @classmethod
-    def find_by_user_id(cls, user_id):
-        posts = Post.query.filter_by(user_id=user_id).all()
+    def find_by_user_name(cls, user_name):
+        posts = Post.query.filter_by(user_name=user_name).all()
         return [post.json() for post in posts]
