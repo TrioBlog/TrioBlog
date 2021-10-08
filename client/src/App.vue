@@ -9,3 +9,14 @@
     <router-view/>
   </div>
 </template>
+
+<style>
+body {
+  margin: 0;
+}
+#app {
+  margin: 0;
+  background-color: #0077B6;
+  height: 100vh;
+}
+</style>
