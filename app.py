@@ -26,7 +26,7 @@ api.add_resource(auth.Register, '/user/register')
 api.add_resource(user.UsersDetail, '/user/<string:user_id>')
 api.add_resource(user.AllUsers, '/users')
 # Post Routes
-api.add_resource(post.UserPosts, '/user/posts/<string:user_id>')
+api.add_resource(post.UserPosts, '/user/posts/<string:user_name>')
 api.add_resource(post.PostId, '/post/<string:post_id>')
 api.add_resource(post.Posts, '/posts')
 # Comment Routes
