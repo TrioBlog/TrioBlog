@@ -6,10 +6,12 @@
     <div class="postFormContainer">
       <form >
         <input
+        name="postTitle"
           :value="postTitle"
           @input="handleChange"
         />
         <input
+        name="postBody"
           :value="postBody"
           @input="handleChange"
         />
@@ -21,6 +23,7 @@
 
 <script>
 // import Post from './Post.vue'
+import {Client} from '../globals'
 export default {
   // components: { Post },
   name: 'CreatePost',
@@ -31,17 +34,17 @@ export default {
   user_name: ''
   }),
   methods:{
-    // handleChange(event){
-    //   event.target.value = event.target.value
-    // },
-    // onSubmit(){
-    //   body = {
-    //     "user_name": this.user_name,
-    //     "body": this.postBody,
-    //     "title": this.postTitle
-    //   }
-    //   Client.post('/post', body)
-    // },
+    handleChange(event){
+      this[event.target.name] = event.target.value
+    },
+    onSubmit(){
+      const body = {
+        "user_name": this.user_name,
+        "body": this.postBody,
+        "title": this.postTitle
+      }
+      Client.post('/post', body)
+    },
   }
 }
 </script>
