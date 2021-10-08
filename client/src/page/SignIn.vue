@@ -68,9 +68,18 @@ button {
   color: #03045E;
   border-radius: 2vh;
   border: 2px solid #03055ecf;
-  width: 15vh;
-  height: 7vh;
-  font-size: 36px;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
+  color: #03045E;
+  font-size: 18px;
+  background-color: #CAF0F8;
+  padding: 6px;
+  border-radius: 10px;
+  border: 2px solid #03045E;
 }
 h1,h2 {
   margin: 2vh;
@@ -81,8 +90,6 @@ h1,h2 {
 }
 .linkdiv {
   margin: 3vh;
-  text-decoration: none;
-  color: #03045E;
 }
 .divCon {
   display: flex;
@@ -91,8 +98,8 @@ h1,h2 {
   text-align: center;
   color: #03045E;
   background-color: #90E0EF;
-  width: 50vh;
-  height: 75vh;
+  width: 35vh;
+  height: 45vh;
   border-radius: 5vh;
 }
 </style>
