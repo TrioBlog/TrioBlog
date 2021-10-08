@@ -27,7 +27,7 @@ class Post(db.Model):
         self.title = title
         self.body = body
         self.user_name = user_name
-        self.user_id = UUID(User.find_by_user_name(user_name).json()['id'])
+        self.user_id = User.find_by_user_name(user_name).json()['id']
 
     def json(self):
         return {
