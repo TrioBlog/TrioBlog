@@ -4,11 +4,11 @@
     <form @submit.prevent="onSubmit">
     <div>
       <h2>Username:</h2>
-       <input type="email" :value="username" @input="handleChange" />
+        <input type="email" :value="username" @input="handleChange" />
     </div>
     <div>
       <h2>Password:</h2>
-       <input type="password" :value="password" @input="handlePass" />
+        <input type="password" :value="password" @input="handlePass" />
     </div>
     <button type="submit" :disabled="username ==='' || password === ''">SignUp</button>
     </form>
