@@ -16,9 +16,9 @@ def read_token(token):
         payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         return {'data': True, "payload": payload}
     except jwt.InvalidSignatureError:
-        return {'data': False, "payload": [{'msg': "Unauthorized"}, 404]}
+        return {'data': False, "payload": {'msg': "Unauthorized", 'error': 404}}
     except jwt.InvalidTokenError:
-        return {'data': False, "payload": [{'msg': "Unauthorized"}, 404]}
+        return {'data': False, "payload": {'msg': "Unauthorized", 'error': 404}}
 
 
 def gen_password(password):
@@ -32,6 +32,7 @@ def compare_password(password, hash_password):
 def strip_token(req):
     try:
         token = req.headers['Authorization'].split(' ')[1]
+        print(token)
         return token
     except:
         return None
