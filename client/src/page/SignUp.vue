@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div >
     <h1>Sign Up</h1>
     <form @submit.prevent="onSubmit">
     <div>
       <h2>Username:</h2>
-        <input type="text" :value="username" @input="handleChange" />
+        <input type="username" :value="username" @input="handleChange" />
     </div>
     <div>
       <h2>Password:</h2>
@@ -36,7 +36,7 @@ export default {
     },
     async onSubmit(){
       try {
-      const res = await axios.post(`${BASE_URL}user/register`, {"user_name": this.username, "password": this.password})
+      const res = await axios.post(`${BASE_URL}/user/register`, {"user_name": this.username, "password": this.password})
       console.log(res)
         this.username = ''
         this.password = ''

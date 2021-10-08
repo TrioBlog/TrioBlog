@@ -14,7 +14,7 @@ class Post(db.Model):
     created_at = db.Column(
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
-                           nullable=False, onupdate=datetime.now)
+                           nullable=False, onupdate=datetime.utcnow)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
         'users.id'), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
@@ -27,7 +27,7 @@ class Post(db.Model):
         self.title = title
         self.body = body
         self.user_name = user_name
-        self.user_id = UUID(User.find_by_user_name(user_name).json()['id'])
+        self.user_id = User.find_by_user_name(user_name).json()['id']
 
     def json(self):
         return {

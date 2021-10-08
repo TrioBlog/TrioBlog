@@ -39,7 +39,7 @@ export default {
     },
     async onSubmit(){
       try {
-      const res = await axios.post(`${BASE_URL}user/login`, {"user_name": this.username, "password": this.password})
+      const res = await axios.post(`${BASE_URL}/user/login`, {"user_name": this.username, "password": this.password})
       if (res.data){
         localStorage.setItem('token', res.data)
         this.password = ''

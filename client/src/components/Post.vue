@@ -1,10 +1,13 @@
 <template>
   <div>
   <div>
-    
+    <div>
+    <h2>{{}}</h2>
+    <h2>{{}}</h2>
   </div>
   <div>
-    <!-- <Comment /> -->
+    <p>{{}}</p>
+  </div>
   </div>
   </div>
 </template>
