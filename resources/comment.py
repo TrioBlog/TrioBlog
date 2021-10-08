@@ -13,7 +13,7 @@ class UserComments(Resource):
         return comments
 
 
-class CommentPost(Resource):
+class Comments(Resource):
     def post(self):
         data = request.get_json()
         params = {}
@@ -24,7 +24,7 @@ class CommentPost(Resource):
         return comment.json(), 201
 
 
-class CommentsIdDep(Resource):
+class CommentId(Resource):
     def patch(self, comment_id):
         comment_id = UUID(comment_id)
         data = request.get_json()

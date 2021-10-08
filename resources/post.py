@@ -21,7 +21,7 @@ class Posts(Resource):
         return post.json(), 201
 
 
-class PostsIdDep(Resource):
+class PostId(Resource):
     def patch(self, post_id):
         post_id = UUID(post_id)
         data = request.get_json()

@@ -12,8 +12,6 @@ class UsersDetail(Resource):
         user = User.find_by_id(user_id)
         return user.json()
 
-
-class UserIdDep(Resource):
     def patch(self, user_id):
         user_id = UUID(user_id)
         data = request.get_json()
