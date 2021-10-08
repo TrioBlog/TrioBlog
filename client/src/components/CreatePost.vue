@@ -19,7 +19,8 @@
 export default {
   name: 'CreatePost',
   data: () => ({
-  typeinput: ''
+  typeinput: '',
+  singlePost: []
   }),
   methods:{
     handleChange(event){
@@ -29,6 +30,7 @@ export default {
      this.$router.push(`/posts`)
     },
 
+    }
+
   }
-}
 </script>
