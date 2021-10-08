@@ -14,8 +14,8 @@
 <script>
 import Post from '../components/Post'
 import CreatePost from '../components/CreatePost'
-import axios from 'axios'
-import BASE_URL from '../globals'
+
+import BASE_URL, {Client} from '../globals'
 
 export default{
 name: 'Home',
@@ -42,7 +42,7 @@ methods:{
     async getPostById(e) {
       e.preventDefault()
       const postId = this.$route.params.post_id
-      const res = await axios.get(`${BASE_URL}/post/${postId}`)
+      const res = await Client.get(`${BASE_URL}/post/${postId}`)
       console.log(res)
       this.fetchSinglePost = res.data
 }

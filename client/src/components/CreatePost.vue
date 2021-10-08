@@ -31,17 +31,17 @@ export default {
   user_name: ''
   }),
   methods:{
-    handleChange(event){
-      event.target.value = event.target.value
-    },
-    onSubmit(){
-      body = {
-        "user_name": this.user_name,
-        "body": this.postBody,
-        "title": this.postTitle
-      }
-      Client.post('/post', body)
-    },
+    // handleChange(event){
+    //   event.target.value = event.target.value
+    // },
+    // onSubmit(){
+    //   body = {
+    //     "user_name": this.user_name,
+    //     "body": this.postBody,
+    //     "title": this.postTitle
+    //   }
+    //   Client.post('/post', body)
+    // },
   }
 }
 </script>
