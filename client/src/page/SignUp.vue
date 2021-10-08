@@ -36,7 +36,7 @@ export default {
     },
     async onSubmit(){
       try {
-      const res = await axios.post(`${BASE_URL}user/register`, {"user_name": this.username, "password": this.password})
+      const res = await axios.post(`${BASE_URL}/user/register`, {"user_name": this.username, "password": this.password})
       console.log(res)
         this.username = ''
         this.password = ''

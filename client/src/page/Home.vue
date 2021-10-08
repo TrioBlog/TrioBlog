@@ -42,7 +42,7 @@ methods:{
     async getPostById(e) {
       e.preventDefault()
       const postId = this.$route.params.post_id
-      const res = await axios.get(`${BASE_URL}post/${postId}`)
+      const res = await axios.get(`${BASE_URL}/post/${postId}`)
       console.log(res)
       this.fetchSinglePost = res.data
 }

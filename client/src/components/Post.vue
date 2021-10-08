@@ -16,9 +16,12 @@
 // import Comment from './Comment'
 export default{
 name: 'Post',
-props:{
-  fetchSinglePost:null
-  }
+// components:{
+//   Comment
+// },
+data: () => ({
+  getposts: []
+  }),
 }
 
 </script>
