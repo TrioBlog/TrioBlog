@@ -8,7 +8,7 @@ class Login(Resource):
     data = request.get_json()
     user = User.find_by_user_name(data["user_name"])
     if compare_password(data["password"], user.json()["password_digest"]):
-      token = create_token({"id": str(user.json()["id"]), "user_name": str(user.json()["user_name"]) })
+      token = create_token({"id": str(user.id), "user_name": user.user_name })
       return token, 200
 
   def get(self):
@@ -20,12 +20,10 @@ class Login(Resource):
 class Register(Resource):
   def post(self):
     data = request.get_json()
-    print(data)
     params = {
       "user_name": data["user_name"],
       "password_digest": gen_password(data["password"])
     }
     user = User(**params)
     user.create()
-    print(user.json())
     return user.json(), 201

@@ -26,9 +26,8 @@ export default {
       this.typeinput = event.target.value
     },
     onSubmit(){
-     this.$router.push(`/posts`)
+      this.$router.push(`/posts`)
     },
-
   }
 }
 </script>
