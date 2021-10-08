@@ -30,7 +30,7 @@ class CommentId(Resource):
         data = request.get_json()
         comment = Comment.find_by_id(comment_id)
         for key in data.keys():
-            comment[key] = data[key]
+            setattr(comment, key, data[key])
         db.session.commit()
         return comment.json()
 
