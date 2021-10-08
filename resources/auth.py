@@ -8,10 +8,13 @@ class Login(Resource):
     def post(self):
         data = request.get_json()
         user = User.find_by_user_name(data["user_name"])
-        if compare_password(data["password"], user.json()["password_digest"]):
-            token = create_token(
-                {"id": str(user.id), "user_name": user.user_name})
-            return token, 200
+        if user:
+            if compare_password(data["password"], user.json()["password_digest"]):
+                token = create_token(
+                    {"id": str(user.id), "user_name": user.user_name})
+                return token, 200
+        else:
+            return 'Unauthorized', 404
 
     def get(self):
         data = request.get_json()
@@ -23,7 +26,6 @@ class Login(Resource):
 class Register(Resource):
     def post(self):
         data = request.get_json()
-        print(data)
         params = {
             "user_name": data["user_name"],
             "password_digest": gen_password(data["password"])
