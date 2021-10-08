@@ -27,4 +27,5 @@ class Register(Resource):
     }
     user = User(**params)
     user.create()
+    print(user.json())
     return user.json(), 201

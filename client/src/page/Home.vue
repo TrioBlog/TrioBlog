@@ -40,16 +40,16 @@ methods:{
     async getPostById(e) {
       e.preventDefault()
       const postId = this.$route.params.post_id
-      const res = await axios.get(`${BASE_URL}/post/${postId}`)
+      const res = await axios.get(`${BASE_URL}post/${postId}`)
       this.fetchSinglePost = res.data
       console.log(res)
 }
     ,
-     async getComments(e) {
-      e.preventDefault()
-      const res = await axios.get()
-      this.postlist = res.data
-}
+//      async getComments(e) {
+//       e.preventDefault()
+//       const res = await axios.get()
+//       this.postlist = res.data
+// }
 }
 
 }

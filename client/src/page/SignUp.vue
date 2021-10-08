@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div >
     <h1>Sign Up</h1>
     <form @submit.prevent="onSubmit">
     <div>
       <h2>Username:</h2>
-        <input type="email" :value="username" @input="handleChange" />
+        <input type="username" :value="username" @input="handleChange" />
     </div>
     <div>
       <h2>Password:</h2>
@@ -16,28 +16,36 @@
 </template>
 
 <script>
-
-export default{
-name: 'SignUp',
-components:{
-  
-},
-data: () => ({
-  username: '',
-  password: ''
-  }),
-methods:{
+import axios from "axios"
+import { BASE_URL } from '../globals'
+export default {
+  name: 'SignUp',
+  components:{
+    
+  },
+  data: () => ({
+    username: '',
+    password: ''
+    }),
+  methods:{
   handleChange(event){
       this.username = event.target.value
     },
     handlePass(event){
       this.password = event.target.value
     },
-    onSubmit(){
-     this.$router.push(`/home`)
+    async onSubmit(){
+      try {
+      const res = await axios.post(`${BASE_URL}user/register`, {"user_name": this.username, "password": this.password})
+      console.log(res)
+        this.username = ''
+        this.password = ''
+        this.$router.push(`/signin`)
+      } catch (err) {
+        console.log(err)
+        alert("an error occurred when attempting try a defferent username")
+      }
     }
-}
-
-
+  }
 }
 </script>
