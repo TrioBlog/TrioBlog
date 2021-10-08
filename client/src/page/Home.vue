@@ -2,10 +2,12 @@
   <div>
   <div>
     <CreatePost />
-  </div>
-  <div v-for="post in fetchSinglePost" :key="post.id">
-    <Post :post="post" />
-  </div>
+  </div> 
+<div v-if="fetchSinglePost[0]" class="postContainer">
+      <section v-for="post in fetchSinglePost" :key="post.id" class="postSection">
+        <Post/>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -41,16 +43,17 @@ methods:{
       e.preventDefault()
       const postId = this.$route.params.post_id
       const res = await axios.get(`${BASE_URL}post/${postId}`)
-      this.fetchSinglePost = res.data
       console.log(res)
+      this.fetchSinglePost = res.data
 }
-    ,
+    
 //      async getComments(e) {
 //       e.preventDefault()
 //       const res = await axios.get()
 //       this.postlist = res.data
 // }
 }
-
 }
+
+
 </script>

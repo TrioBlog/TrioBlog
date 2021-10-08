@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="divCon">
     <h1>Sign In</h1>
     <form @submit.prevent="onSubmit" >
       <div>
@@ -51,3 +51,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

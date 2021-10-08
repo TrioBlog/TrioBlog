@@ -9,8 +9,7 @@ from sqlalchemy.orm import joinedload
 
 class Posts(Resource):
     def get(self):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             posts = Post.find_all()
             return posts
@@ -18,9 +17,9 @@ class Posts(Resource):
             return read_token(token)['payload']
 
     def post(self):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
+            data = request.get_json()
             params = {}
             for key in data.keys():
                 params[key] = data[key]
@@ -33,9 +32,9 @@ class Posts(Resource):
 
 class PostId(Resource):
     def patch(self, post_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
+            data = request.get_json()
             post_id = UUID(post_id)
             post = Post.find_by_id(post_id)
             for key in data.keys():
@@ -46,8 +45,7 @@ class PostId(Resource):
             return read_token(token)['payload']
 
     def delete(self, post_id):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             post_id = UUID(post_id)
             post = Post.find_by_id(post_id)
@@ -65,8 +63,7 @@ class PostId(Resource):
 
 class UserPosts(Resource):
     def get(self, user_name):
-        data = request.get_json()
-        token = strip_token(data)
+        token = strip_token(request)
         if read_token(token)['data']:
             posts = Post.find_by_user_name(user_name)
             return posts
