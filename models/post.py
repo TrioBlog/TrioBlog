@@ -6,7 +6,7 @@ import uuid
 
 
 class Post(db.Model):
-    __tablename__ = 'posts'
+    __tablename__ = 'post'
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = db.Column(db.String(50), nullable=False)
@@ -16,12 +16,12 @@ class Post(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.utcnow)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
-        'users.id'), nullable=False)
+        'user.id'), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
 
-    user = db.relationship('User', backref=db.backref('post_user', lazy=True))
+    user = db.relationship('User', backref=db.backref('posts', lazy=True))
     comment = db.relationship(
-        "Comment", cascade='all', backref=db.backref('post_comments', lazy=True))
+        "Comment", cascade='all', backref=db.backref('post', lazy=True))
 
     def __init__(self, title, body, user_name):
         self.title = title

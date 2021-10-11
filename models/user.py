@@ -5,7 +5,7 @@ import uuid
 
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_name = db.Column(db.String(255), nullable=False, unique=True)
@@ -16,10 +16,10 @@ class User(db.Model):
                            nullable=False, onupdate=datetime.utcnow)
 
 # Associations
-    post = db.relationship("Post", cascade='all',
-                           backref=db.backref('user_posts', lazy=True))
-    comment = db.relationship("Comment", cascade='all',
-                              backref=db.backref('user_comments', lazy=True))
+    posts = db.relationship("Post", cascade='all',
+                            backref=db.backref('user', lazy=True))
+    comments = db.relationship("Comment", cascade='all',
+                               backref=db.backref('user', lazy=True))
 
     def __init__(self, user_name, password_digest):
         self.user_name = user_name

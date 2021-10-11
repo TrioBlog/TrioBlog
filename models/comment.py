@@ -6,7 +6,7 @@ from models.user import User
 
 
 class Comment(db.Model):
-    __tablename__ = 'comments'
+    __tablename__ = 'comment'
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     body = db.Column(db.String(100), nullable=False)
@@ -15,15 +15,15 @@ class Comment(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.utcnow)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
-        'users.id'), nullable=False)
+        'user.id'), nullable=False)
     post_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
-        'posts.id'), nullable=False)
+        'post.id'), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
 
     user = db.relationship(
-        'User', backref=db.backref('comment_user', lazy=True))
+        'User', backref=db.backref('comments', lazy=True))
     post = db.relationship(
-        'Post', backref=db.backref('comment_post', lazy=True))
+        'Post', backref=db.backref('comments', lazy=True))
 
     def __init__(self, body, user_id, post_id):
         self.body = body
