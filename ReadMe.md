@@ -3,7 +3,7 @@
 ### **Developed By**
 #### __Backend Baron__: Tanner Mitchel
 #### __Frontend Master__: Micah Stewart
-#### __All-Around Ambassador__: Sam'an Griffiths
+#### __All-Around Ambassador__: Sam'an Khaliq
 
 ### __Service Description__
 This is a freeform blog created by a talented team of developers in hopes to give people a place to share whatever they're thinking
